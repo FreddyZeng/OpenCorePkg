@@ -20,7 +20,7 @@
   PLATFORM_NAME                  = OpenDuetPkg
   PLATFORM_GUID                  = 199E24E0-0989-42AA-87F2-611A8C397E72
   PLATFORM_VERSION               = 0.92
-  DSC_SPECIFICATION              = 0x00010006
+  DSC_SPECIFICATION              = 0x0001001C
   OUTPUT_DIRECTORY               = Build/OpenDuetPkg
   SUPPORTED_ARCHITECTURES        = X64|IA32
   BUILD_TARGETS                  = RELEASE|DEBUG|NOOPT
@@ -79,6 +79,7 @@
   VariableFlashInfoLib|MdeModulePkg/Library/BaseVariableFlashInfoLib/BaseVariableFlashInfoLib.inf
   UefiImageExtraActionLib|MdePkg/Library/BaseUefiImageExtraActionLibNull/BaseUefiImageExtraActionLibNull.inf
   PeCoffLib2|MdePkg/Library/BasePeCoffLib2/BasePeCoffLib2.inf
+  ImagePropertiesRecordLib|MdeModulePkg/Library/ImagePropertiesRecordLib/ImagePropertiesRecordLib.inf
   #
   # Generic Modules
   #
@@ -165,7 +166,7 @@
 
   MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
   MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
-  MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf {
+  OpenCorePkg/Legacy/BootPlatform/ConSplitterDxe/ConSplitterDxe.inf {
     <LibraryClasses>
       PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
     <PcdsPatchableInModule>
@@ -190,16 +191,16 @@
   }
   UefiCpuPkg/CpuIo2Dxe/CpuIo2Dxe.inf
   OpenCorePkg/Legacy/BootPlatform/CpuDxe/CpuDxe.inf
-  OvmfPkg/8259InterruptControllerDxe/8259.inf {
+  OpenCorePkg/Legacy/BootPlatform/8259InterruptControllerDxe/8259.inf {
     <PcdsFixedAtBuild>
-      gUefiOvmfPkgTokenSpaceGuid.Pcd8259LegacyModeMask|0xFFFC
+      gOpenCorePkgTokenSpaceGuid.Pcd8259LegacyModeMask|0xFFFC
   }
   OpenCorePkg/Legacy/BootPlatform/AcpiResetDxe/Reset.inf
   MdeModulePkg/Universal/Metronome/Metronome.inf
 
   # Chipset
   PcAtChipsetPkg/PcatRealTimeClockRuntimeDxe/PcatRealTimeClockRuntimeDxe.inf
-  OvmfPkg/8254TimerDxe/8254Timer.inf
+  OpenCorePkg/Legacy/BootPlatform/8254TimerDxe/8254Timer.inf
   OpenCorePkg/Legacy/BootPlatform/PciRootBridgeDxe/PciRootBridgeNoEnumeration.inf
   OpenCorePkg/Legacy/BootPlatform/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
   MdeModulePkg/Bus/Pci/NvmExpressDxe/NvmExpressDxe.inf
@@ -244,19 +245,17 @@
   OpenCorePkg/Legacy/BootPlatform/LegacyRegion2Dxe/LegacyRegion2Dxe.inf
   OpenCorePkg/Legacy/BootPlatform/BiosVideo/BiosVideo.inf
 
-  OpenCorePkg/Library/OcCompilerIntrinsicsLib/OcCompilerIntrinsicsLib.inf
-
 [LibraryClasses]
-  NULL|OpenCorePkg/Library/OcCompilerIntrinsicsLib/OcCompilerIntrinsicsLib.inf
+  NULL|MdePkg/Library/IntrinsicLib/IntrinsicLib.inf
 
 [PcdsFeatureFlag]
   gEfiMdeModulePkgTokenSpaceGuid.PcdSupportHiiImageProtocol|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdHiiOsRuntimeSupport|FALSE
-  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutUgaSupport|FALSE
+  gOpenCorePkgTokenSpaceGuid.PcdConOutUgaSupport|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDevicePathSupportDevicePathFromText|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDevicePathSupportDevicePathToText|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdTurnOffUsbLegacySupport|TRUE
-  gEfiMdePkgTokenSpaceGuid.PcdUgaConsumeSupport|FALSE
+  gOpenCorePkgTokenSpaceGuid.PcdUgaConsumeSupport|FALSE
 
 [PcdsFixedAtBuild]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"Acidanthera"
